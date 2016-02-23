@@ -2,6 +2,7 @@ require 'rubygems'
 require 'gosu'
 
 require_relative 'Source/Interface'
+require_relative 'Source/Entities'
 
 class GameWindow < Gosu::Window
   

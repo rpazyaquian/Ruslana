@@ -62,12 +62,5 @@ class UserInterface
     end
   end
   
-  def resize(x, y)
-    @tileWidth += x
-    @tileHeight += y
-    @width = @tileWidth * @@uiTileSize
-    @height = @tileHeight * @@uiTileSize
-    puts "X: #{@tileWidth}"
-    puts "Y: #{@tileHeight}"
-  end
+  
 end
