@@ -8,30 +8,19 @@ class GameWindow < Gosu::Window
   def initialize
     super 640, 400, false
     self.caption = 'Ruslana'
-    @uiWindow = UserInterface.new(self,50,20,0,0, 7)
+    @uiWindow = UserInterface.new(self, UI_CONST::STAT_WIDTH, UI_CONST::STAT_HEIGHT, 0, 0, UI_CONST::WINDOW_Z)
   end
   
   def draw
-    @uiWindow.draw
+    
+    if @uiWindow != nil then
+      @uiWindow.draw
+    end
+    
   end
   
   def update
     
-    if button_down? Gosu::KbDown then
-      @uiWindow.resize(0,1)
-    end
-    
-    if button_down? Gosu::KbUp then
-      @uiWindow.resize(0,-1)
-    end
-    
-    if button_down? Gosu::KbRight then
-      @uiWindow.resize(1,0)
-    end
-    
-    if button_down? Gosu::KbLeft then
-      @uiWindow.resize(-1,0)
-    end
     
   end
   

@@ -5,12 +5,17 @@
       all you need to make any kind of UI element!  
 =end
 
+module UI_CONST
+  STAT_WIDTH = 29
+  STAT_HEIGHT = 8
+  WINDOW_Z = 10
+end
 
 
 class UserInterface
   
-  attr_accessor :height
-  attr_accessor :width
+  attr_accessor :tileHeight
+  attr_accessor :tileWidth
   attr_accessor :x
   attr_accessor :y
   
@@ -62,5 +67,7 @@ class UserInterface
     @tileHeight += y
     @width = @tileWidth * @@uiTileSize
     @height = @tileHeight * @@uiTileSize
+    puts "X: #{@tileWidth}"
+    puts "Y: #{@tileHeight}"
   end
 end
