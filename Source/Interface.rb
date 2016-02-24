@@ -38,9 +38,9 @@ class UserInterface
   def draw
     # First drawing the corners
     @image[0].draw(@x, @y, @zOrder)
-    @image[0].draw(@x + @width, @y, @zOrder)
-    @image[0].draw(@x, @y + @height, @zOrder)
-    @image[0].draw(@x + @width, @y + @height, @zOrder)
+    @image[2].draw(@x + @width, @y, @zOrder)
+    @image[6].draw(@x, @y + @height, @zOrder)
+    @image[8].draw(@x + @width, @y + @height, @zOrder)
     
     # Now drawing the borders
     for i in 0..@tileWidth
