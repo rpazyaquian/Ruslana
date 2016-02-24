@@ -1,9 +1,10 @@
 
-=begin
-      
-      This is where all the code for playable and unplayable entities goes. Maybe they're controlled by AI, hahah.
-        
-=end
+#===============================================
+#
+# => Game Actors and statistics
+#
+#===============================================
+
 
 class Actor
   # A class where all the statted-out entities lie. Not sure how the game will work going forward but the player can be one such entity.
@@ -33,7 +34,7 @@ end
 #===============================================
 
 module GameMaps
-  TILE = 40
+  Tilesize = 40
 end
 
 class Map
@@ -56,12 +57,27 @@ class Map
   end
 
   
-  def draw(layer)
+  def draw
+    
+    #=====================================#
+    #   The map is only two layers deep,  #
+    # so there is no reason to loop calls #
+    # to the drawlayer method.            #
+    #=====================================#
+    
+    drawlayer(0)
+    drawlayer(1)
+    
+  end
+  
+  def drawlayer(layer)
     for y in 0..@layout[:height]
         for x in 0..@layout[:width]
             tile = @layout[:layers][layer][:data][(y*@layout[:width]) + x - 1]
-            if tile
-                @tiles[tile - 1].draw(x * 40, y *40, 0)
+            if tile.nil?
+                @tiles[0].draw(x * GameMaps::Tilesize, y *GameMaps::Tilesize, 0)
+            else
+                @tiles[tile - 1].draw(x * GameMaps::Tilesize, y *GameMaps::Tilesize, 0)
             end
         end
      end

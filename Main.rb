@@ -20,7 +20,7 @@ class GameWindow < Gosu::Window
       @uiWindow.draw
     end
     
-    @map.draw(0)
+    @map.draw
     
   end
   
