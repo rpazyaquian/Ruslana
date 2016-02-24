@@ -24,3 +24,27 @@ class Resources
   end
   
 end
+
+
+#===============================================
+#
+# => Map functions
+#
+#===============================================
+
+module GameMaps
+  TILE = 40
+end
+
+class Map
+  
+  def initialize(mapfile)
+    @layout = setup(mapfile)
+    
+  end
+  
+  def load(mapfile)
+    #mapdata = File.readlines("Maps/#{mapfile}.NKM", "r") do
+  end
+  
+end
