@@ -31,7 +31,7 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/Graphics\/Maptiles_A.png",
+         "image":"Graphics\/Maptiles_A.png",
          "imageheight":80,
          "imagewidth":240,
          "margin":0,

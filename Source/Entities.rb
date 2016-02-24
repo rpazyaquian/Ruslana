@@ -39,12 +39,32 @@ end
 class Map
   
   def initialize(mapfile)
-    @layout = setup(mapfile)
-    
+    @layout = load(mapfile)
+    @tiles = Gosu::Image.load_tiles(@layout[:tilesets][0][:image], 40,40, :retro => true )
   end
   
   def load(mapfile)
-    #mapdata = File.readlines("Maps/#{mapfile}.NKM", "r") do
+    
+    #This function loads the initial values into the map for usage.
+    
+    file = File.open("Maps/" + mapfile + ".json", 'r')
+    layout = file.read
+    file.close
+    return JSON.parse(layout, :symbolize_names => true)
+    
+    #The names are symbolized to make reading the hash easier for me.
+  end
+
+  
+  def draw(layer)
+    for y in 0..@layout[:height]
+        for x in 0..@layout[:width]
+            tile = @layout[:layers][layer][:data][(y*@layout[:width]) + x - 1]
+            if tile
+                @tiles[tile - 1].draw(x * 40, y *40, 0)
+            end
+        end
+     end
   end
   
 end

@@ -10,6 +10,7 @@ class GameWindow < Gosu::Window
   def initialize
     super 640, 400, false
     self.caption = 'Ruslana'
+    @map = Map.new("MockMap")
     @uiWindow = UserInterface.new(self, UI_CONST::STAT_WIDTH, UI_CONST::STAT_HEIGHT, 0, 0, UI_CONST::WINDOW_Z)
   end
   
@@ -18,6 +19,8 @@ class GameWindow < Gosu::Window
     if @uiWindow != nil then
       @uiWindow.draw
     end
+    
+    @map.draw(0)
     
   end
   
