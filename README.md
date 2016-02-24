@@ -1,13 +1,12 @@
 # Ruslana
 
-Ruslana's intended to be a light roguelike and management game. Something like that. As you can see it's a work in progress!
+Ruslana's intended to be a light RPG and simple management game. Something like that. As you can see it's a work in progress!
 
-## Current Features
+## Dependencies
 
-* UI Windows
-* You can close the game
+* Gosu, Json, rubygems
+* Ruby
 
-## Future Features
+## Features
 
-* More graphics
-* Gameplay of some kind
+* Map loading and UI skeleton
