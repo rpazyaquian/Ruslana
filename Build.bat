@@ -1,1 +1,0 @@
-ocra --windows --icon RuIcon.ico --output Ruslana.exe Main.rb
