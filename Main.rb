@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'gosu'
+require 'json'
 
 require_relative 'Source/Interface'
 require_relative 'Source/Entities'
