@@ -9,6 +9,7 @@ module UI_CONST
   STAT_WIDTH = 29
   STAT_HEIGHT = 8
   WINDOW_Z = 10
+  DEBUG_TIP = "DEBUG MODE"
 end
 
 
@@ -19,6 +20,7 @@ class UserInterfaceWindow
   attr_accessor :x
   attr_accessor :y
   attr_accessor :focus
+  attr_accessor :tip
   
   def initialize(window, width, height, x, y, zOrder)
     ################################################################
@@ -31,11 +33,13 @@ class UserInterfaceWindow
     @width = width * @@uiTileSize
     @height = height * @@uiTileSize
     @window = window
-    @x = x
-    @y = y
+    @x, @y = x, y
+
     @image = Gosu::Image.load_tiles("Graphics/UI-Window.png", @@uiTileSize, @@uiTileSize, :retro => true)
     @font  = Gosu::Font.new(16, :name => "Graphics/Perfect DOS VGA 437.ttf")
     @focus = false
+    
+    @tip = "WELCOME!"
   end
   
   def draw
@@ -102,6 +106,12 @@ end
 #=====================================================
 #   Mouse cursor class
 #       This should control which element has focus
+#       
+#   The states are as follows:
+#       0- Regular pointer state
+#       1- Translation state
+#       2- Will be added
+#       3- Will be added
 #=====================================================
 
 class MouseCursor
@@ -117,6 +127,7 @@ class MouseCursor
         @x = 0
         @y = 0
         @z = 10
+        @old_x, @old_y = 0 , 0
     end
     
     def draw
@@ -126,6 +137,23 @@ class MouseCursor
     def update
         @x = @@window.mouse_x
         @y = @@window.mouse_y
+        
+        #======================================#
+        #   Hold down RMB to move the camera   #
+        #======================================#
+        if @@window.button_down? Gosu::MsRight
+            new_x, new_y = @old_x+(@x/1.5).floor , @old_y+(@y/2).floor
+            @@window.uiWindow.tip = "MOVING"
+            @@window.camera_x, @@window.camera_y = (new_x * -1), (new_y * - 1)
+            @state = 1
+            return
+        end
+        @state = 0
+        if new_x.nil?
+            return
+        end
+        @old_x, @old_y = new_x, new_y
+        
     end
     
 end

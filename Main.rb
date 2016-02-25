@@ -6,20 +6,23 @@ require_relative 'Source/Interface'
 require_relative 'Source/Entities'
 
 class GameWindow < Gosu::Window
-  
+  attr_accessor     :camera_x
+  attr_accessor     :camera_y
+  attr_accessor     :uiWindow
   def initialize
-    super 640, 400, false
+    super 960, 600, false
     self.caption = 'Ruslana'
     @map = Map.new("MockMap")
     @uiWindow = UserInterfaceWindow.new(self, UI_CONST::STAT_WIDTH, UI_CONST::STAT_HEIGHT, 0, 0, UI_CONST::WINDOW_Z)
     @cursor = MouseCursor.new(self)
+    @camera_x , @camera_y = 0 , 0
   end
   
   def draw
     
     if @uiWindow then
       @uiWindow.draw
-      @uiWindow.show("GREETINGS! LET'S PLAY!")
+      @uiWindow.show(@uiWindow.tip)
     end
     
     @map.draw
@@ -36,10 +39,10 @@ class GameWindow < Gosu::Window
   #=======================================
   
   def update
-    
+    @map.trans_x, @map.trans_y = @camera_x , @camera_y
+    @cursor.update
     if @uiWindow then
-        @cursor.update
-        @uiWindow.update
+        @uiWindow.update    
     end
   end
   

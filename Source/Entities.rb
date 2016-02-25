@@ -38,10 +38,19 @@ module GameMaps
 end
 
 class Map
+  attr_accessor :trans_x
+  attr_accessor :trans_y
+  
+  #=====================================#
+  #     The attributes allow
+  #     map elements to be panned
+  #     by the window camera
+  #=====================================#
   
   def initialize(mapfile)
     @layout = load(mapfile)
     @tiles = Gosu::Image.load_tiles(@layout[:tilesets][0][:image], 40,40, :retro => true )
+    
   end
   
   def load(mapfile)
@@ -75,9 +84,9 @@ class Map
         for x in 0..@layout[:width]
             tile = @layout[:layers][layer][:data][(y*@layout[:width]) + x - 1]
             if tile.nil?
-                @tiles[0].draw(x * GameMaps::Tilesize, y *GameMaps::Tilesize, 0)
+                @tiles[0].draw(x * GameMaps::Tilesize + @trans_x, y *GameMaps::Tilesize, 0)
             else
-                @tiles[tile - 1].draw(x * GameMaps::Tilesize, y *GameMaps::Tilesize, 0)
+                @tiles[tile - 1].draw(x * GameMaps::Tilesize + @trans_x, y *GameMaps::Tilesize + @trans_y, 0)
             end
         end
      end
