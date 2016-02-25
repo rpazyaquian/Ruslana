@@ -13,4 +13,4 @@ To get them, just open your command line and type "gem install <library>"
 
 * Map loading and UI skeleton
 
-!(http://i.imgur.com/9CUhBl7.png "Let's make a game!")
+![Ruslana](http://i.imgur.com/9CUhBl7.png "Let's make a game!")
