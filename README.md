@@ -7,7 +7,7 @@ Ruslana's intended to be a light RPG and simple management game. Something like 
 * Gosu, Json, rubygems
 * Ruby
 
-To get them, just open your command line and type "gem install <library>"
+To get them, just open your command line and type `--gem install <library>`
 
 ### Features
 
