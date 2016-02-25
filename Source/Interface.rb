@@ -12,12 +12,13 @@ module UI_CONST
 end
 
 
-class UserInterface
+class UserInterfaceWindow
   
   attr_accessor :tileHeight
   attr_accessor :tileWidth
   attr_accessor :x
   attr_accessor :y
+  attr_accessor :focus
   
   def initialize(window, width, height, x, y, zOrder)
     ################################################################
@@ -33,6 +34,8 @@ class UserInterface
     @x = x
     @y = y
     @image = Gosu::Image.load_tiles("Graphics/UI-Window.png", @@uiTileSize, @@uiTileSize, :retro => true)
+    @font  = Gosu::Font.new(16, :name => "Graphics/Perfect DOS VGA 437.ttf")
+    @focus = false
   end
   
   def draw
@@ -62,5 +65,67 @@ class UserInterface
     end
   end
   
+  def show(text)
+    @font.draw(text,@x + 10,@y + 10, @zOrder)
+  end
+ 
+ 
+#=====================================================
+#   Window update and system stack.
+#       Maybe we can push/pop window states and focus!
+#=====================================================
+  def update
+    if @focus == false then 
+        return
+    end
+    
+    if @window.button_down? Gosu::KbDown
+        @y +=2
+    end
+    
+    if @window.button_down? Gosu::KbRight
+        @x +=2
+    end
+    
+    if @y > @window.height
+        @y = 0
+    end
+    
+    if @x > @window.width
+        @x = 0
+    end
+  end
   
+  
+end
+
+#=====================================================
+#   Mouse cursor class
+#       This should control which element has focus
+#=====================================================
+
+class MouseCursor
+    attr_reader :y
+    attr_reader :x
+    
+    def initialize(window)
+        @@window = window
+        @@pointersize = 16
+        p = @@pointersize
+        @pointer = Gosu::Image.load_tiles("Graphics/UI-Cursors.png", p, p, :retro => true)
+        @state = 0
+        @x = 0
+        @y = 0
+        @z = 10
+    end
+    
+    def draw
+        @pointer[@state].draw(@x,@y,@z)
+    end
+        
+    def update
+        @x = @@window.mouse_x
+        @y = @@window.mouse_y
+    end
+    
 end
