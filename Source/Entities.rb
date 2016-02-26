@@ -40,6 +40,8 @@ end
 class Map
   attr_accessor :trans_x
   attr_accessor :trans_y
+  attr_accessor :pix_width
+  attr_accessor :pix_height
   
   #=====================================#
   #     The attributes allow
@@ -50,6 +52,8 @@ class Map
   def initialize(mapfile)
     @layout = load(mapfile)
     @tiles = Gosu::Image.load_tiles(@layout[:tilesets][0][:image], 40,40, :retro => true )
+    @pix_width = @layout[:width] * GameMaps::Tilesize
+    @pix_height = @layout[:height] * GameMaps::Tilesize
     
   end
   

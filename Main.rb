@@ -44,6 +44,30 @@ class GameWindow < Gosu::Window
     if @uiWindow then
         @uiWindow.update    
     end
+    bind_camera
+  end
+  
+  #=======================================
+  #  This method binds the camera within
+  #  the boundaries of the map to keep
+  #  it in view.
+  #=======================================
+  
+  def bind_camera
+    pad_TL = GameMaps::Tilesize * 2
+    pad_BR = GameMaps::Tilesize * 6
+    if @camera_y > pad_TL
+       @camera_y = pad_TL
+    end
+    if @camera_x > pad_TL
+       @camera_x = pad_TL
+    end
+    if @camera_y < (@map.pix_height * - 1) + pad_BR
+        @camera_y = (@map.pix_height * - 1) + pad_BR
+    end
+    if @camera_x < (@map.pix_width * - 1) + pad_BR
+        @camera_x = (@map.pix_width * - 1) + pad_BR
+    end
   end
   
 end

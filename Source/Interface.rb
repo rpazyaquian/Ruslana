@@ -146,13 +146,23 @@ class MouseCursor
             @@window.uiWindow.tip = "MOVING"
             @@window.camera_x = @old_x + (@x - @origin_x)
             @@window.camera_y = @old_y + (@y - @origin_y)
+            
+            #===========================================
+            #   Exit the method if the button's still
+            #   held down, to prevent storing the
+            #   transform prematurely
             return
         end
-        @state = 0
+        
+        #===========================================
+        #   Store the current camera position and
+        #   set the pan origin to the current
+        #   mouse position
+        
         @old_x, @old_y = @@window.camera_x, @@window.camera_y
         @origin_x = @x
         @origin_y = @y
-        
+        @state = 0      
         
     end
     
