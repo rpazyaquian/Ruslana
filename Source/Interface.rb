@@ -142,17 +142,17 @@ class MouseCursor
         #   Hold down RMB to move the camera   #
         #======================================#
         if @@window.button_down? Gosu::MsRight
-            new_x, new_y = @old_x+(@x/1.5).floor , @old_y+(@y/2).floor
-            @@window.uiWindow.tip = "MOVING"
-            @@window.camera_x, @@window.camera_y = (new_x * -1), (new_y * - 1)
             @state = 1
+            @@window.uiWindow.tip = "MOVING"
+            @@window.camera_x = @old_x + (@x - @origin_x)
+            @@window.camera_y = @old_y + (@y - @origin_y)
             return
         end
         @state = 0
-        if new_x.nil?
-            return
-        end
-        @old_x, @old_y = new_x, new_y
+        @old_x, @old_y = @@window.camera_x, @@window.camera_y
+        @origin_x = @x
+        @origin_y = @y
+        
         
     end
     
